@@ -1,15 +1,18 @@
--- Lab Program 11
--- Create the StudentDetails view.
---
--- The view must display:
--- StudentName
--- CourseName
--- DepartmentName
---
--- Required view name:
--- StudentDetails
+DELIMITER //
 
-USE CollegeDB;
+CREATE FUNCTION CountStudents(p_DepartmentID INT)
+RETURNS INT
+DETERMINISTIC
+BEGIN
+    DECLARE student_count INT;
 
--- Write your solution below.
+    SELECT COUNT(*)
+    INTO student_count
+    FROM Student
+    WHERE DepartmentID = p_DepartmentID;
 
+    RETURN student_count;
+END //
+
+DELIMITER ;
+SELECT CountStudents(1) AS Total_Students;
